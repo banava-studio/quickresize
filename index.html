@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>QuickResize — In-Browser Image Compressor & Resizer</title>
+    <meta name="title" content="QuickResize — In-Browser Image Compressor & Resizer" />
+    <meta name="description" content="Fast in-browser image compressor and resizer. Target exact file sizes (20KB, 50KB, 100KB), convert WebP, JPG, PNG formats, crop passport photos, and resize for forms. QuickResize processes selected images locally in your browser for supported tools and does not upload the image file to QuickResize's own servers." />
+    <meta name="keywords" content="image compressor, compress image online, reduce image size, compress image to 20kb, compress image to 50kb, compress image to 100kb, compress image to 200kb, resize image, image resizer, jpg compressor, png compressor, webp compressor" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://quickresize.banavalabs.com/" />
+    
+    <!-- Favicon & App Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+
+    <!-- PWA & Mobile Optimization -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#1e1b4b" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="QuickResize" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://quickresize.banavalabs.com/" />
+    <meta property="og:title" content="QuickResize — In-Browser Image Compressor & Resizer" />
+    <meta property="og:description" content="Target exact file sizes (20KB, 50KB, 100KB), convert formats, and optimize photos directly in your browser. Local processing protects your privacy." />
+    <meta property="og:image" content="https://quickresize.banavalabs.com/icons/icon-512x512.png" />
+    <meta property="og:site_name" content="QuickResize" />
+
+    <!-- Twitter Cards -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://quickresize.banavalabs.com/" />
+    <meta property="twitter:title" content="QuickResize — In-Browser Image Compressor & Resizer" />
+    <meta property="twitter:description" content="Target exact file sizes (20KB, 50KB, 100KB), convert formats, and optimize photos directly in your browser. Local processing protects your privacy." />
+    <meta property="twitter:image" content="https://quickresize.banavalabs.com/icons/icon-512x512.png" />
+
+    <!-- Google Structured Data / JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "QuickResize",
+        "url": "https://quickresize.banavalabs.com",
+        "operatingSystem": "All",
+        "applicationCategory": "MultimediaApplication",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "description": "Fast in-browser image compressor and resizer. Target exact file sizes (20KB, 50KB, 100KB), convert WebP, JPG, PNG formats, and crop passport photos. Operates locally in your browser.",
+        "browserRequirements": "Requires JavaScript. Requires HTML5 Canvas.",
+        "softwareVersion": "1.0.0"
+      }
+    </script>
+  </head>
+  <body class="antialiased selection:bg-indigo-100 dark:selection:bg-indigo-950">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Service Worker registration disabled for sandbox stability -->
+  </body>
+</html>
+

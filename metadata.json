@@ -1,0 +1,6 @@
+{
+  "name": "QuickResize",
+  "description": "Fast in-browser image compressor and resizer. Target exact file sizes (20KB, 50KB, 100KB), convert WebP, JPG, PNG formats, crop passport photos, and resize for forms. QuickResize processes selected images locally in your browser for supported tools and does not upload the image file to QuickResize's own servers.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

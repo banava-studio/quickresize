@@ -1,0 +1,38 @@
+{
+  "name": "QuickResize - Local Mobile-First Image Optimizer",
+  "short_name": "QuickResize",
+  "description": "Compress, Resize and Optimize Images in Seconds with absolute offline privacy.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#6366f1",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["utilities", "productivity"],
+  "shortcuts": [
+    {
+      "name": "New Compression Task",
+      "url": "/?mode=compress",
+      "description": "Open QuickResize in Compression mode"
+    },
+    {
+      "name": "New Resize Task",
+      "url": "/?mode=resize",
+      "description": "Open QuickResize in Resizer mode"
+    }
+  ]
+}
