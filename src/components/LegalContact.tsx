@@ -32,11 +32,12 @@ export default function LegalContact({ initialTab = 'privacy' }: LegalContactPro
   
   // Contact state
   const [contactName, setContactName] = useState<string>('');
+  const [contactSenderEmail, setContactSenderEmail] = useState<string>('');
   const [contactSubject, setContactSubject] = useState<string>('');
   const [contactMsg, setContactMsg] = useState<string>('');
   const [copiedEmail, setCopiedEmail] = useState<boolean>(false);
 
-  const supportEmail = 'contact@banavalabs.com';
+  const supportEmail = 'banavalabs@gmail.com';
 
   const handleCopyEmail = () => {
     if (typeof navigator !== 'undefined' && navigator.clipboard) {
@@ -46,12 +47,29 @@ export default function LegalContact({ initialTab = 'privacy' }: LegalContactPro
     }
   };
 
+  const buildMailDetails = () => {
+    const subject = contactSubject.trim() || `QuickResize Inquiry from ${contactName.trim() || 'User'}`;
+    const bodyLines = [
+      `Sender Name: ${contactName.trim() || 'Not specified'}`,
+      `Sender Email: ${contactSenderEmail.trim() || 'Not specified'}`,
+      '',
+      'Message:',
+      contactMsg.trim() || '(No message body provided)'
+    ];
+    const body = bodyLines.join('\n');
+    return { subject, body };
+  };
+
   const handleOpenMailto = (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(contactSubject.trim() || `QuickResize Inquiry from ${contactName.trim() || 'User'}`);
-    const bodyText = `Name: ${contactName.trim() || 'Not specified'}\n\nMessage:\n${contactMsg.trim()}`;
-    const body = encodeURIComponent(bodyText);
-    window.location.href = `mailto:${supportEmail}?subject=${subject}&body=${body}`;
+    const { subject, body } = buildMailDetails();
+    window.location.href = `mailto:${supportEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
+
+  const handleOpenGmailWeb = () => {
+    const { subject, body } = buildMailDetails();
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(supportEmail)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.open(gmailUrl, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -159,7 +177,7 @@ export default function LegalContact({ initialTab = 'privacy' }: LegalContactPro
                   <div className="space-y-2">
                     <h4 className="font-bold text-slate-800 dark:text-slate-205 text-sm">4. Contact Inquiries & Support Communications</h4>
                     <p>
-                      When you reach out to our team via email (mailto link or direct message), we receive the name, email address, and message content you provide. We use this information solely to respond to your questions, address bug reports, and improve our services. We do not sell or rent contact information to third parties.
+                      When you reach out to our team via email at <strong className="font-semibold text-slate-800 dark:text-slate-200">banavalabs@gmail.com</strong> (via direct email, mailto link, or webmail draft), we receive the name, email address, and message content you provide. We use this information solely to respond to your questions, address bug reports, and improve our services. We do not sell or rent contact information to third parties.
                     </p>
                   </div>
 
@@ -290,17 +308,29 @@ export default function LegalContact({ initialTab = 'privacy' }: LegalContactPro
                   </div>
                 </div>
 
-                {/* Draft Email Form with Mailto Trigger */}
+                {/* Draft Email Form with Mailto & Gmail Web Triggers */}
                 <form onSubmit={handleOpenMailto} className="space-y-4 max-w-lg pt-2">
-                  <div>
-                    <label className="text-xs font-bold text-slate-600 dark:text-slate-400 block mb-1">Your Name</label>
-                    <input
-                      type="text"
-                      value={contactName}
-                      onChange={(e) => setContactName(e.target.value)}
-                      className="w-full text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white px-4 py-2.5 dark:border-slate-850 dark:bg-slate-900 outline-none focus:border-indigo-500 dark:text-white"
-                      placeholder="Your name or organization"
-                    />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="text-xs font-bold text-slate-600 dark:text-slate-400 block mb-1">Your Name</label>
+                      <input
+                        type="text"
+                        value={contactName}
+                        onChange={(e) => setContactName(e.target.value)}
+                        className="w-full text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white px-4 py-2.5 dark:border-slate-850 dark:bg-slate-900 outline-none focus:border-indigo-500 dark:text-white"
+                        placeholder="Your name or organization"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs font-bold text-slate-600 dark:text-slate-400 block mb-1">Your Email</label>
+                      <input
+                        type="email"
+                        value={contactSenderEmail}
+                        onChange={(e) => setContactSenderEmail(e.target.value)}
+                        className="w-full text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white px-4 py-2.5 dark:border-slate-850 dark:bg-slate-900 outline-none focus:border-indigo-500 dark:text-white"
+                        placeholder="you@example.com"
+                      />
+                    </div>
                   </div>
 
                   <div>
@@ -310,7 +340,7 @@ export default function LegalContact({ initialTab = 'privacy' }: LegalContactPro
                       value={contactSubject}
                       onChange={(e) => setContactSubject(e.target.value)}
                       className="w-full text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white px-4 py-2.5 dark:border-slate-850 dark:bg-slate-900 outline-none focus:border-indigo-500 dark:text-white"
-                      placeholder="e.g. Feature request, preset suggestion, or question"
+                      placeholder="e.g. Feature request, preset suggestion, or inquiry"
                     />
                   </div>
 
@@ -322,20 +352,32 @@ export default function LegalContact({ initialTab = 'privacy' }: LegalContactPro
                       value={contactMsg}
                       onChange={(e) => setContactMsg(e.target.value)}
                       className="w-full text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white px-4 py-2.5 dark:border-slate-850 dark:bg-slate-900 outline-none focus:border-indigo-500 dark:text-white leading-relaxed"
-                      placeholder="Describe your suggestion or question..."
+                      placeholder="Describe your suggestion, feedback, or question..."
                     />
                   </div>
 
-                  <div>
-                    <button
-                      type="submit"
-                      className="inline-flex items-center gap-1.5 rounded-xl bg-slate-950 px-5 py-2.5 text-xs font-bold text-white hover:bg-slate-900 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-100 cursor-pointer transition-colors shadow"
-                    >
-                      <Send className="h-4 w-4" />
-                      Draft Message in Email App
-                    </button>
-                    <p className="text-[11px] text-slate-400 mt-2">
-                      Clicking will open your default email application addressed to {supportEmail} with your subject and message pre-filled.
+                  <div className="pt-1">
+                    <div className="flex flex-wrap items-center gap-2.5">
+                      <button
+                        type="submit"
+                        className="inline-flex items-center gap-1.5 rounded-xl bg-slate-950 px-5 py-2.5 text-xs font-bold text-white hover:bg-slate-900 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-100 cursor-pointer transition-colors shadow"
+                      >
+                        <Send className="h-4 w-4" />
+                        Send via Email App
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={handleOpenGmailWeb}
+                        className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-bold text-slate-800 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700 cursor-pointer transition-colors shadow-sm"
+                      >
+                        <ExternalLink className="h-4 w-4 text-red-500" />
+                        Send via Gmail (Web)
+                      </button>
+                    </div>
+
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-2.5">
+                      All messages are received at <strong className="font-semibold text-slate-700 dark:text-slate-200">{supportEmail}</strong>. Clicking will open your preferred mail client with your details pre-filled.
                     </p>
                   </div>
                 </form>

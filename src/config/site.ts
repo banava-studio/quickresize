@@ -20,10 +20,8 @@ export const SITE_CONFIG = {
     : 'QuickResize',
   publisher: 'BanavaLabs',
   brandTagline: 'QuickResize by BanavaLabs',
-  contactEmail: (envContactEmail && typeof envContactEmail === 'string')
-    ? envContactEmail
-    : 'contact@banavalabs.com',
-  supportEmail: 'support@banavalabs.com',
+  contactEmail: 'banavalabs@gmail.com',
+  supportEmail: 'banavalabs@gmail.com',
   author: 'QuickResize Editorial Team',
   defaultTitle: 'QuickResize — Fast, Private In-Browser Image Compressor & Resizer',
   defaultDescription: 'Compress, resize, and convert images locally in your browser with complete privacy. No server uploads, zero sign-ups, instant results.',
